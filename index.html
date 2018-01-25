@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>VueJS - Tuto Graphikart 1/15</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/menu.css"/>
+	<style>
+		.main.container{
+			padding: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div class="ui inverted fixed menu">
+		<div class="header item">Tutoriel</div>
+	</div>
+	<!-- on englobe notre code vue JS par un élément auquel on donne un ID-->
+	<div class="ui main container" id="app">
+		<a v-bind:href="link">{{ message }}</a>
+		<div class="ui success message" v-if="success">
+			<p>Bravo ça marche !</p>
+		</div>
+		<div class="ui error message" v-else>
+			<p>Echec</p>
+		</div>
+		<ul>
+			<li v-for="person in persons">{{ person }}</li>
+		</ul>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+	<script src="js/app.js"></script>
+</body>
+</html>
