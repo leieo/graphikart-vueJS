@@ -5,5 +5,10 @@ new Vue({
 		link: 'https://www.youtube.com/watch?v=XkgiXngcpWk',
 		success: true,
 		persons: ['Leïla', 'Audre', 'Faïza', 'Aimé']
+	},
+	methods: {
+		close: function () {
+			this.success = false
+		}
 	}
 })
