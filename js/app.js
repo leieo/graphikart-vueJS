@@ -1,15 +1,19 @@
-let vm = new Vue({
+let vm = new Vue ({
 	el: '#app',
 	data: {
-		seconds: 0
+		firstname: 'Faïza',
+		lastname: 'Guène'
 	},
-	mounted: function () {
-		this.$interval = setInterval(() => {
-			console.log('bip')
-			this.seconds++
-		}, 1000)
-	},
-	destroyed: function () {
-		clearInterval(this.$interval)
+	computed: {
+		fullname: {
+			get: function () {
+			return this.firstname + ' ' + this.lastname
+			},
+			set: function (value) {
+				let parts = value.split(' ')
+				this.firstname = parts[0]
+				this.lastname = parts[1]
+			}
+		}
 	}
 })
