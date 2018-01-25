@@ -1,14 +1,15 @@
-new Vue({
+let vm = new Vue({
 	el: '#app',
 	data: {
-		message: 'Hi',
-		link: 'https://www.youtube.com/watch?v=XkgiXngcpWk',
-		success: true,
-		persons: ['Leïla', 'Audre', 'Faïza', 'Aimé']
+		seconds: 0
 	},
-	methods: {
-		close: function () {
-			this.success = false
-		}
+	mounted: function () {
+		this.$interval = setInterval(() => {
+			console.log('bip')
+			this.seconds++
+		}, 1000)
+	},
+	destroyed: function () {
+		clearInterval(this.$interval)
 	}
 })
