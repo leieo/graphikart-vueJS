@@ -1,14 +1,48 @@
-Vue.component('message', {
-	props: ['type', 'message'],
+let message = {
+	props: {
+		state: {type: String, default: 'success'},
+		message: {type: String, default: 'WARN : edit your message in the instance\'s data'}
+	},
 	template: `
-		<div :class="type">
+		<div :class="state">
 			{{ message }}
 		</div>
 	`
-})
+}
+
+let counter = {
+	data: function() {
+		return  {
+			count: 0
+		}
+	},
+
+	props: {
+		start: {type: Number, default: 0}
+	},
+
+	computed: {
+		startValue: function() {
+			return this.count + this.start;
+		}
+	},
+
+	methods: {
+		increment: function() {
+			this.count ++;
+		}
+	},
+
+	template: `
+		<button @click="increment">
+			{{ startValue }}
+		</button>
+	`
+}
 
 let vm = new Vue ({
 	el: '#app',
+	components: { message, counter },
 	data: {
 		message: 'Un meilleur texte'
 	},
