@@ -21,12 +21,6 @@ let counter = {
 		start: {type: Number, default: 0}
 	},
 
-	computed: {
-		startValue: function() {
-			return this.count + this.start;
-		}
-	},
-
 	methods: {
 		increment: function() {
 			this.count ++;
@@ -35,9 +29,13 @@ let counter = {
 
 	template: `
 		<button @click="increment">
-			{{ startValue }}
+			{{ count }}
 		</button>
-	`
+	`,
+
+	mounted: function() {
+		this.count = this.start;
+	}
 }
 
 let vm = new Vue ({
