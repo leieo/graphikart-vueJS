@@ -50,14 +50,50 @@ let counter = {
 	}
 }
 
+let formUser = { 
+	props: {
+		value: Object
+	},
+
+	data () {
+		return { 
+			user: JSON.parse(JSON.stringify(this.value))
+		}
+	},
+
+	methods: {
+		save () {
+			this.$emit('input', this.user)
+		}
+	},
+
+	template: `
+		<form class="main container" @submit.prevent="save">
+			<div class="field">
+				<label for="first">Prénom</label>
+				<input id="first" type="text" v-model="user.firstname">
+			</div>
+			<div class="field">
+				<label for="last">Nom</label>
+				<input id="last" type="text" v-model="user.lastname">
+			</div>
+			<button class="ui button" type="submit">Envoyer</button>
+		</form>
+	`
+}
+
 let vm = new Vue ({
 	el: '#app',
-	components: { message, counter },
+	components: { message, counter, formUser },
 
 	data: {
 		message: 'Un meilleur texte',
 		header: 'header test',
-		alertOk: false
+		alertOk: false,
+		user: {
+			firstname: 'Jean',
+			lastname: 'Delatour'
+		}
 	},
 
 	methods: {
