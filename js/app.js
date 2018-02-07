@@ -69,6 +69,7 @@ let formUser = {
 
 	template: `
 		<form class="main container" @submit.prevent="save">
+			<p><slot name="haut"></slot></p>
 			<div class="field">
 				<label for="first">Prénom</label>
 				<input id="first" type="text" v-model="user.firstname">
@@ -78,8 +79,13 @@ let formUser = {
 				<input id="last" type="text" v-model="user.lastname">
 			</div>
 			<button class="ui button" type="submit">Envoyer</button>
+			<p><slot name="bas"></slot></p>
 		</form>
-	`
+	`,
+
+	mounted: function () {
+		console.log(this)
+	}
 }
 
 let vm = new Vue ({

@@ -38,7 +38,10 @@
 	</div>
 	<!-- on englobe notre code vue JS par un élément auquel on donne un ID-->
 	<div class="ui main container" id="app">
-		<form-user v-model="user"></form-user>
+		<form-user v-model="user">
+			<div slot="haut">Texte à l'intérieur du composant form-user, en haut.</div>
+			<div slot="bas">Texte à l'intérieur du composant form-user, en bas.</div>
+		</form-user>
 		<pre>
 			 {{ user }}
 		</pre>
