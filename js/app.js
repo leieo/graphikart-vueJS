@@ -1,13 +1,25 @@
 let message = {
 	props: {
 		state: {type: String, default: 'success'},
-		message: {type: String, default: 'WARN : edit your message in the instance\'s data'}
+		message: {type: String, default: 'WARN : edit your message in the instance\'s data'},
+		header: String
 	},
+
 	template: `
 		<div :class="state">
+			<div class="header">
+				<i class="close icon" @click="close"></i>
+				{{ header }}
+			</div>
 			{{ message }}
 		</div>
-	`
+	`,
+
+	methods: {
+		close () {
+			this.$emit('close')
+		}
+	}
 }
 
 let counter = {
@@ -41,15 +53,20 @@ let counter = {
 let vm = new Vue ({
 	el: '#app',
 	components: { message, counter },
+
 	data: {
-		message: 'Un meilleur texte'
+		message: 'Un meilleur texte',
+		header: 'header test',
+		alertOk: false
 	},
+
 	methods: {
-		demo: function () {
-			console.log('demo')
+		showAlert () {
+			this.alertOk = true;
 		},
-		demo2:function () {
-			console.log('demo2')
+
+		hideAlert () {
+			this.alertOk = false;
 		}
 	}
 })

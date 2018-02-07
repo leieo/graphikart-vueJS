@@ -16,11 +16,19 @@
 			height: 10px;
 			background: red;
 		}
+		.close{
+			background: black;
+		}
 		.success{
 			color: #00FF00;
 		}
 		.error{
 			color: #FF0000;
+		}
+		.header{
+			color: black;
+			text-transform: uppercase;
+			font-size: 18px;
 		}
 	</style>
 </head>
@@ -30,7 +38,8 @@
 	</div>
 	<!-- on englobe notre code vue JS par un élément auquel on donne un ID-->
 	<div class="ui main container" id="app">
-		<message state="error" :message="message"></message>
+		<message state="error" :message="message" header="Attention !" v-if="alertOk" @close="hideAlert"></message>
+		<button @click="showAlert">Alerter</button>
 		<counter :start="3"></counter>
 		<counter></counter>
 	</div>
