@@ -1,19 +1,23 @@
+Vue.component('message', {
+	props: ['type', 'message'],
+	template: `
+		<div :class="type">
+			{{ message }}
+		</div>
+	`
+})
+
 let vm = new Vue ({
 	el: '#app',
 	data: {
-		firstname: 'Faïza',
-		lastname: 'Guène'
+		message: 'Un meilleur texte'
 	},
-	computed: {
-		fullname: {
-			get: function () {
-			return this.firstname + ' ' + this.lastname
-			},
-			set: function (value) {
-				let parts = value.split(' ')
-				this.firstname = parts[0]
-				this.lastname = parts[1]
-			}
+	methods: {
+		demo: function () {
+			console.log('demo')
+		},
+		demo2:function () {
+			console.log('demo2')
 		}
 	}
 })

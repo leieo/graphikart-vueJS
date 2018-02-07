@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>VueJS - Tuto Graphikart 3/15</title>
+	<title>VueJS - Tuto Graphikart 6/15</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/menu.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css">
+
 	<style>
 		.main.container{
 			padding: 50px;
@@ -28,11 +30,7 @@
 	</div>
 	<!-- on englobe notre code vue JS par un élément auquel on donne un ID-->
 	<div class="ui main container" id="app">
-		<p>
-			Prénom : {{ firstname }}<br>
-			Nom : {{ lastname }}<br>
-			SON NOM COMPLET EST <input type="text" v-model="fullname">
-		</p>
+		<message type="error" :message="message"></message>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
 	<script src="js/app.js"></script>
