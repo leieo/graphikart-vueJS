@@ -1,114 +1,62 @@
-let message = {
-	props: {
-		state: {type: String, default: 'success'},
-		message: {type: String, default: 'WARN : edit your message in the instance\'s data'},
-		header: String
-	},
-
-	template: `
-		<div :class="state">
-			<div class="header">
-				<i class="close icon" @click="close"></i>
-				{{ header }}
-			</div>
-			{{ message }}
-		</div>
-	`,
-
-	methods: {
-		close () {
-			this.$emit('close')
+class NotificationStore {
+	
+	constructor () {
+		this.state = {
+			count: 0
 		}
 	}
+
+	increment () {
+		this.state.count++
+	}
+
+	decrement () {
+		this.state.count--
+	}
 }
+
+let notifications_store = new NotificationStore()
+
+
+
 
 let counter = {
 	data: function() {
-		return  {
-			count: 0
+		return {
+			state: notifications_store.state
 		}
 	},
 
-	props: {
-		start: {type: Number, default: 0}
+	computed: {
+		count() {
+			return this.state.count
+		}
 	},
 
 	methods: {
-		increment: function() {
-			this.count ++;
+		increment() {
+			notifications_store.increment()
 		}
 	},
 
-	template: `
-		<button @click="increment">
-			{{ count }}
-		</button>
-	`,
-
-	mounted: function() {
-		this.count = this.start;
-	}
+	template: `<button @click="increment"> {{ count }} </button>`
 }
 
-let formUser = { 
-	props: {
-		value: Object
-	},
-
-	data () {
-		return { 
-			user: JSON.parse(JSON.stringify(this.value))
-		}
-	},
-
+let notifications = {
+	components: { counter },
 	methods: {
-		save () {
-			this.$emit('input', this.user)
+		addNotification () {
+			notifications_store.increment()
 		}
 	},
-
-	template: `
-		<form class="main container" @submit.prevent="save">
-			<p><slot name="haut"></slot></p>
-			<div class="field">
-				<label for="first">Prénom</label>
-				<input id="first" type="text" v-model="user.firstname">
-			</div>
-			<div class="field">
-				<label for="last">Nom</label>
-				<input id="last" type="text" v-model="user.lastname">
-			</div>
-			<button class="ui button" type="submit">Envoyer</button>
-			<p><slot name="bas"></slot></p>
-		</form>
-	`,
-
-	mounted: function () {
-		console.log(this)
-	}
+	template : `
+		<div>
+			<button @click="addNotification">Add</button>
+		</div>
+	`
 }
 
-let vm = new Vue ({
-	el: '#app',
-	components: { message, counter, formUser },
-
-	data: {
-		message: 'Un meilleur texte',
-		header: 'header test',
-		alertOk: false,
-		user: {
-			firstname: 'Jean',
-			lastname: 'Delatour'
-		}
-	},
-
-	methods: {
-		showAlert () {
-			this.alertOk = true;
-		},
-
-		hideAlert () {
-			this.alertOk = false;
-		}
-	}
+new Vue({
+	el: "#app",
+	components: { counter, notifications }
 })
